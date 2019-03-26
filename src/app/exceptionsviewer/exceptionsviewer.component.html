@@ -1,0 +1,82 @@
+<div class = 'container'>
+  <div class = 'inputs'>
+    <mat-form-field class = 'datetimepicker'>
+      <mat-label>DateTime:</mat-label>
+      <input matInput type="datetime-local" [(ngModel)]="datetime">
+    </mat-form-field>&nbsp;
+    <mat-form-field>
+      <mat-label>Environment</mat-label>
+      <mat-select (selectionChange)="selected($event)">
+          <mat-option *ngFor='let env of environments' [value]="env.name">{{env.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>&nbsp;
+    <mat-form-field>
+      <mat-label>Job</mat-label>
+      <input matInput type='text' [(ngModel)]="jobId">
+    </mat-form-field>&nbsp;
+    <button mat-raised-button (click)="getFailedRuns()">Get Exceptions</button>&nbsp;
+  </div>
+  &nbsp;&nbsp;
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <br>
+
+  <div>
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="jobId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> jobId. </th>
+            <td mat-cell *matCellDef="let element"> {{element.jobId}} </td>
+          </ng-container>
+        
+          <!-- runId Column -->
+          <ng-container matColumnDef="runId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> runId </th>
+            <td mat-cell *matCellDef="let element"> {{element.runId}} </td>
+          </ng-container>
+        
+          <!-- environment Column -->
+          <ng-container matColumnDef="environment">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> environment </th>
+            <td mat-cell *matCellDef="let element"> {{element.environment}} </td>
+          </ng-container>
+        
+          <!-- jobName Column -->
+          <ng-container matColumnDef="jobName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> jobName </th>
+            <td mat-cell *matCellDef="let element"> {{element.jobName}} </td>
+          </ng-container>
+          <!-- runTime Column -->
+          <ng-container matColumnDef="runTime">
+              <th mat-header-cell *matHeaderCellDef  mat-sort-header> runTime </th>
+              <td mat-cell *matCellDef="let element"> {{element.runTime}} </td>
+            </ng-container>
+          
+            <!-- completionTime Column -->
+            <ng-container matColumnDef="completionTime">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> completionTime </th>
+              <td mat-cell *matCellDef="let element"> {{element.completionTime}} </td>
+            </ng-container>
+          
+            <!-- recordsPulled Column -->
+            <ng-container matColumnDef="recordsPulled">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> recordsPulled </th>
+              <td mat-cell *matCellDef="let element"> {{element.recordsPulled}} </td>
+            </ng-container>
+          
+            <!-- recordsSucceeded Column -->
+            <ng-container matColumnDef="recordsSucceeded">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> recordsSucceeded </th>
+              <td mat-cell *matCellDef="let element"> {{element.recordsSucceeded}} </td>
+            </ng-container>
+            <!-- recordsFailed Column -->
+            <ng-container matColumnDef="recordsFailed">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> recordsFailed </th>
+                <td mat-cell *matCellDef="let element"> {{element.recordsFailed}} </td>
+              </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+  </div>
+</div>

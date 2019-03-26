@@ -1,0 +1,23 @@
+<mat-accordion multi="true">
+  <mat-expansion-panel *ngFor="let data of datastructure">
+    <mat-expansion-panel-header>
+        <mat-panel-title>Environment: {{data.environment}}</mat-panel-title>
+        <div class= "environment"> Successes: {{data.totalSuccess}}&nbsp;&nbsp;&nbsp; Exceptions: {{data.totalException}}&nbsp;&nbsp;&nbsp; Timeouts: {{data.totalTimeout}} </div>
+        <span class = "spacer"></span>
+    </mat-expansion-panel-header>
+    <mat-list>
+        <mat-list-item *ngFor="let job of data.jobs; let odd = odd" [class.odd]="odd">
+          <span class = 'jobid'>ID: {{job.id}} </span>
+          <span class = 'jobname'>Name: {{job.name}} </span>
+          <span class = 'lastrun'>Last Run: {{job.lastrun}} </span>
+          <span class = 'jobhealth'>Successess: {{job.successfulruns}} </span>
+          <span class = 'jobhealth'>Exceptions: {{job.exceptionruns}} </span>
+          <span class = 'jobhealth'>Timeouts: {{job.timedoutruns}} </span>
+        </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>  
+</mat-accordion>
+<button mat-icon-button (click)="getDatastructure()"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M9 13.5c-2.49 0-4.5-2.01-4.5-4.5S6.51 4.5 9 4.5c1.24 0 2.36.52 3.17 1.33L10 8h5V3l-1.76 1.76C12.15 3.68 10.66 3 9 3 5.69 3 3.01 5.69 3.01 9S5.69 15 9 15c2.97 0 5.43-2.16 5.9-5h-1.52c-.46 2-2.24 3.5-4.38 3.5z"/></svg>								</button>
+
+
+

@@ -1,0 +1,25 @@
+.jobid{
+    width: 100px;
+}
+.jobname {
+    width: 200px;
+}
+.jobhealth {
+    width: 140px;
+}
+.lastrun {
+    width: 250px;
+}
+.environment{
+    float:right;
+    border: 1px solid grey;
+    padding: 5px;
+    border-radius: 2px;
+    background: rgba(0, 30, 150, 0.1);
+}
+.spacer {
+    width: 80px;
+}
+.odd {
+    background: rgba(0, 30, 150, 0.3); 
+}
