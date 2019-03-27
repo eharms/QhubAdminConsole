@@ -7,6 +7,7 @@
     <mat-form-field>
       <mat-label>Environment</mat-label>
       <mat-select (selectionChange)="selected($event)">
+          <mat-option  [value]=''></mat-option>
           <mat-option *ngFor='let env of environments' [value]="env.name">{{env.name}}</mat-option>
       </mat-select>
     </mat-form-field>&nbsp;
@@ -23,59 +24,91 @@
   <br>
 
   <div>
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
         <ng-container matColumnDef="jobId">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> jobId. </th>
-            <td mat-cell *matCellDef="let element"> {{element.jobId}} </td>
-          </ng-container>
-        
-          <!-- runId Column -->
-          <ng-container matColumnDef="runId">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> runId </th>
-            <td mat-cell *matCellDef="let element"> {{element.runId}} </td>
-          </ng-container>
-        
-          <!-- environment Column -->
-          <ng-container matColumnDef="environment">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> environment </th>
-            <td mat-cell *matCellDef="let element"> {{element.environment}} </td>
-          </ng-container>
-        
-          <!-- jobName Column -->
-          <ng-container matColumnDef="jobName">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> jobName </th>
-            <td mat-cell *matCellDef="let element"> {{element.jobName}} </td>
-          </ng-container>
-          <!-- runTime Column -->
-          <ng-container matColumnDef="runTime">
-              <th mat-header-cell *matHeaderCellDef  mat-sort-header> runTime </th>
-              <td mat-cell *matCellDef="let element"> {{element.runTime}} </td>
-            </ng-container>
-          
-            <!-- completionTime Column -->
-            <ng-container matColumnDef="completionTime">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> completionTime </th>
-              <td mat-cell *matCellDef="let element"> {{element.completionTime}} </td>
-            </ng-container>
-          
-            <!-- recordsPulled Column -->
-            <ng-container matColumnDef="recordsPulled">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> recordsPulled </th>
-              <td mat-cell *matCellDef="let element"> {{element.recordsPulled}} </td>
-            </ng-container>
-          
-            <!-- recordsSucceeded Column -->
-            <ng-container matColumnDef="recordsSucceeded">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> recordsSucceeded </th>
-              <td mat-cell *matCellDef="let element"> {{element.recordsSucceeded}} </td>
-            </ng-container>
-            <!-- recordsFailed Column -->
-            <ng-container matColumnDef="recordsFailed">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> recordsFailed </th>
-                <td mat-cell *matCellDef="let element"> {{element.recordsFailed}} </td>
-              </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> jobId. </th>
+          <td mat-cell *matCellDef="let element"
+          (click)="expandedElement = expandedElement === element ? null : element; getExceptionDetails(element.runId, element.jobId)"> {{element.jobId}} </td>
+        </ng-container>
+      
+        <!-- runId Column -->
+        <ng-container matColumnDef="runId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> runId </th>
+          <td mat-cell *matCellDef="let element"
+          (click)="expandedElement = expandedElement === element ? null : element; getExceptionDetails(element.runId, element.jobId)"> {{element.runId}} </td>
+        </ng-container>
+      
+        <!-- environment Column -->
+        <ng-container matColumnDef="environment">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> environment </th>
+          <td mat-cell *matCellDef="let element"
+          (click)="expandedElement = expandedElement === element ? null : element; getExceptionDetails(element.runId, element.jobId)"> {{element.environment}} </td>
+        </ng-container>
+      
+        <!-- jobName Column -->
+        <ng-container matColumnDef="jobName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> jobName </th>
+          <td mat-cell *matCellDef="let element"
+          (click)="expandedElement = expandedElement === element ? null : element; getExceptionDetails(element.runId, element.jobId)"> {{element.jobName}} </td>
+        </ng-container>
+        <!-- runTime Column -->
+        <ng-container matColumnDef="runTime">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> runTime </th>
+          <td mat-cell *matCellDef="let element"
+          (click)="expandedElement = expandedElement === element ? null : element; getExceptionDetails(element.runId, element.jobId)"> {{element.runTime}} </td>
+        </ng-container>
+      
+        <!-- completionTime Column -->
+        <ng-container matColumnDef="completionTime">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> completionTime </th>
+          <td mat-cell *matCellDef="let element"
+          (click)="expandedElement = expandedElement === element ? null : element; getExceptionDetails(element.runId, element.jobId)"> {{element.completionTime}} </td>
+        </ng-container>
+      
+        <!-- recordsPulled Column -->
+        <ng-container matColumnDef="recordsPulled">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> recordsPulled </th>
+          <td mat-cell *matCellDef="let element"
+          (click)="expandedElement = expandedElement === element ? null : element; getExceptionDetails(element.runId, element.jobId)"> {{element.recordsPulled}} </td>
+        </ng-container>
+      
+        <!-- recordsSucceeded Column -->
+        <ng-container matColumnDef="recordsSucceeded">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> recordsSucceeded </th>
+          <td mat-cell *matCellDef="let element"
+          (click)="expandedElement = expandedElement === element ? null : element; getExceptionDetails(element.runId, element.jobId)"> {{element.recordsSucceeded}} </td>
+        </ng-container>
+        <!-- recordsFailed Column -->
+        <ng-container matColumnDef="recordsFailed">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> recordsFailed </th>
+          <td mat-cell *matCellDef="let element"
+          (click)="expandedElement = expandedElement === element ? null : element; getExceptionDetails(element.runId, element.jobId)"> {{element.recordsFailed}} </td>
+        </ng-container>
+        <!-- BUTTONS -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element"> <button mat-raised-button (click)="rekickJob(element.jobId)">Re-Kick All</button></td>
+        </ng-container>
+        <!-- Expansion Column -->
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+            <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+              <mat-list-item *ngFor="let doc of documents; let odd = odd" [class.odd]="odd">
+                <div class = 'docWrapper'>
+                  <div class = 'docId'>Doc ID: {{doc.docId}} </div>
+                  <div class = 'sourceId'>Source ID: {{doc.sourceId}} </div>
+                  <div class = 'stream'>Stream: {{doc.stream}} </div>
+                  <button (click)="getLog(doc.docId)" mat-raised-button>View Doc</button>&nbsp;&nbsp;
+                  <button (click)="rekickDoc(doc.docId)" mat-raised-button>Re-Kick</button>
+                </div>
+              </mat-list-item>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;"class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
   </div>

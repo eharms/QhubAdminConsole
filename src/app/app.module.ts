@@ -6,9 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { JobhealthComponent } from './jobhealth/jobhealth.component';
-import { ExceptionsviewerComponent } from './exceptionsviewer/exceptionsviewer.component';
+import { ExceptionsviewerComponent, logViewer } from './exceptionsviewer/exceptionsviewer.component';
 import { RecordsearchComponent } from './recordsearch/recordsearch.component';
 import { AppMaterialModule } from './app-material.module';
+
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AppMaterialModule } from './app-material.module';
     JobhealthComponent,
     ExceptionsviewerComponent,
     RecordsearchComponent,
+    logViewer
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,7 @@ import { AppMaterialModule } from './app-material.module';
     FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [logViewer],
 })
 export class AppModule { }

@@ -2,7 +2,7 @@
   <mat-expansion-panel *ngFor="let data of datastructure">
     <mat-expansion-panel-header>
         <mat-panel-title>Environment: {{data.environment}}</mat-panel-title>
-        <div class= "environment"> Successes: {{data.totalSuccess}}&nbsp;&nbsp;&nbsp; Exceptions: {{data.totalException}}&nbsp;&nbsp;&nbsp; Timeouts: {{data.totalTimeout}} </div>
+        <div class= "environment"> Total: {{data.total}}&nbsp;&nbsp;&nbsp;  Successes: {{data.totalSuccess}}&nbsp;&nbsp;&nbsp; Exceptions: {{data.totalException}}&nbsp;&nbsp;&nbsp; Timeouts: {{data.totalTimeout}} </div>
         <span class = "spacer"></span>
     </mat-expansion-panel-header>
     <mat-list>

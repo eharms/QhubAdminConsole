@@ -44,7 +44,8 @@ export class JobhealthComponent implements OnInit {
           totalTimeout += job.timedoutruns;
         }
       })
-      finalobject.push({environment: env, jobs: jobtemp, totalSuccess: totalSuccess, totalException: totalException, totalTimeout: totalTimeout})
+      let total = totalSuccess + totalException + totalTimeout;
+      finalobject.push({environment: env, jobs: jobtemp, totalSuccess: totalSuccess, totalException: totalException, totalTimeout: totalTimeout, total: total})
     })
     this.datastructure = finalobject
   }

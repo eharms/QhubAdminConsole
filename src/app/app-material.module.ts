@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule, MatCheckboxModule, MatMenuModule, MatIconModule, MatToolbarModule, MatDividerModule, MatListModule,
         MatExpansionModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatInputModule, MatTableModule,
-        MatPaginatorModule, MatSortModule, MatTabsModule} from '@angular/material';
+        MatPaginatorModule, MatSortModule, MatTabsModule, MatDialogModule} from '@angular/material';
 
 @NgModule({
   declarations: [],
@@ -23,7 +23,8 @@ import {MatButtonModule, MatCheckboxModule, MatMenuModule, MatIconModule, MatToo
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule
   ],
   exports: [
     CommonModule,
@@ -42,7 +43,8 @@ import {MatButtonModule, MatCheckboxModule, MatMenuModule, MatIconModule, MatToo
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule
   ]
 })
 export class AppMaterialModule { }
