@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {job} from '../mock-jobs';
+import {job} from '../objects';
 import {JobhealthService} from './jobhealth.service'
-import { environment } from 'src/environments/environment';
+import { environment } from '../objects';
 
 @Component({
   selector: 'app-jobhealth',
@@ -11,16 +11,26 @@ import { environment } from 'src/environments/environment';
 export class JobhealthComponent implements OnInit {
 
   jobs: job[];
+  environments: environment[];
   datastructure;
 
   constructor(private jobhealthService: JobhealthService) { }
 
   ngOnInit() {
-    this.getDatastructure();
+    this.getEnvironments()
+    this.getDatastructure()
+  }
+
+  getEnvironments(): void{
+    this.environments = this.jobhealthService.getEnvironments();
   }
 
   getDatastructure() : void {
     this.jobs = this.jobhealthService.getJobs();
+    /*
+    this.jobs = this.jobhealthService.getJobs()
+    .subscribe(jobs => this.jobs = jobs);
+    */
     let env: string[] = [];
     this.jobs.forEach((job, i) => {
       env.push(job.environment);

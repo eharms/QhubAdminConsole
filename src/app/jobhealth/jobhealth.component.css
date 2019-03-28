@@ -20,6 +20,9 @@
 .spacer {
     width: 80px;
 }
+.refreshButton {
+    float: left;
+}
 .odd {
     background: rgba(0, 30, 150, 0.3); 
 }

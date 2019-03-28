@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { ExceptionsService } from './exceptions.service';
-import { environment } from '../mock-jobs';
-import { failedRun } from '../mock-jobs';
-import { document } from '../mock-jobs';
+import { environment } from '../objects';
+import { failedRun } from '../objects';
+import { document } from '../objects';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';

@@ -9,6 +9,7 @@ import { JobhealthComponent } from './jobhealth/jobhealth.component';
 import { ExceptionsviewerComponent, logViewer } from './exceptionsviewer/exceptionsviewer.component';
 import { RecordsearchComponent } from './recordsearch/recordsearch.component';
 import { AppMaterialModule } from './app-material.module';
+import 'hammerjs';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { AppMaterialModule } from './app-material.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     AppMaterialModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
