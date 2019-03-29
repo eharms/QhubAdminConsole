@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {job} from '../objects';
+import {job, ENVIRONMENTS} from '../objects';
 import {JobhealthService} from './jobhealth.service'
 import { environment } from '../objects';
 
@@ -23,6 +23,12 @@ export class JobhealthComponent implements OnInit {
 
   getEnvironments(): void{
     this.environments = this.jobhealthService.getEnvironments();
+  }
+
+  updateDatastructure(env: any): void {
+    
+
+
   }
 
   getDatastructure() : void {
@@ -59,5 +65,6 @@ export class JobhealthComponent implements OnInit {
     })
     this.datastructure = finalobject
   }
+  
 
 }

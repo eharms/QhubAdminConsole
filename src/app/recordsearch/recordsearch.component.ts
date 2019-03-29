@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { RecordsearchService } from './recordsearch.service';
+import {searchResultArray} from '../objects';
 
 @Component({
   selector: 'app-recordsearch',
@@ -12,13 +13,13 @@ export class RecordsearchComponent implements OnInit {
   constructor(private RecordsearchService: RecordsearchService) { }
 
   searchTerm: string
-  result: any
+  results: searchResultArray;
 
   ngOnInit() {
   }
 
   searchRecords(searchString: string){
-    this.result = this.RecordsearchService.searchRecords(this.searchTerm)
+    this.results = this.RecordsearchService.searchRecords(this.searchTerm)
   }
 
 }

@@ -35,7 +35,10 @@ export class ExceptionsviewerComponent implements OnInit {
   documents: document[];
   dataSource: MatTableDataSource<failedRun>;
   expandedElement: failedRun | null;
-  log: any;
+  log: {
+    keys: any
+    source: any
+  };
 
    @ViewChild(MatPaginator) paginator: MatPaginator;
    @ViewChild(MatSort) sort: MatSort;
@@ -69,16 +72,49 @@ export class ExceptionsviewerComponent implements OnInit {
   getLog(docId: any){
     console.log('docId: ' + docId)
     this.log = this.ExceptionsService.getLog(docId);
-    console.log(this.log)
+    //this.log = {keys: preProcessed.keys, source: preProcessed.source}
+    //console.log(this.log)
     this.openDialog();
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(logViewer, {
       width: '99%',
-      data: {JobId: this.jobId, Log: this.log}
+      data: {source: this.prettyPrintJson.toHtml(this.log.source), keys: this.prettyPrintJson.toHtml(this.log.keys)}
     });
   }
+
+  prettyPrintJson = {
+    toHtml: (thing) => {
+       const htmlEntities = (string) => {
+          // Makes text displayable in browsers
+          return string
+             .replace(/&/g,   '&amp;')
+             .replace(/\\"/g, '&bsol;&quot;')
+             .replace(/</g,   '&lt;')
+             .replace(/>/g,   '&gt;');
+          };
+       const replacer = (match, p1, p2, p3, p4) => {
+          // Converts the four parenthesized capture groups into HTML
+          const part =       { indent: p1, key: p2, value: p3, end: p4 };
+          const key =        '<span class=json-key>';
+          const val =        '<span class=json-value>';
+          const bool =       '<span class=json-boolean>';
+          const str =        '<span class=json-string>';
+          const isBool =     ['true', 'false'].includes(part.value);
+          const valSpan =    /^"/.test(part.value) ? str : isBool ? bool : val;
+          const findName =   /"([\w]+)": |(.*): /;
+          const indentHtml = part.indent || '';
+          const keyHtml =    part.key ? key + part.key.replace(findName, '$1$2') + '</span>: ' : '';
+          const valueHtml =  part.value ? valSpan + part.value + '</span>' : '';
+          const endHtml =    part.end || '';
+          return indentHtml + keyHtml + valueHtml + endHtml;
+          };
+       const jsonLine = /^( *)("[^"]+": )?("[^"]*"|[\w.+-]*)?([{}[\],]*)?$/mg;
+       return htmlEntities(JSON.stringify(thing, null, 3))
+          .replace(jsonLine, replacer);
+       }
+    };
 
   rekickDoc(docId: any){
     if(window.confirm('reKick ' + docId + '?'))
@@ -101,12 +137,12 @@ export class ExceptionsviewerComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
 }
 
 @Component({
   selector: 'logViewer',
-  templateUrl: 'logViewer.html',
+  templateUrl: './logViewer.component.html',
+  styleUrls: ['./logViewer.component.css'],
 })
 export class logViewer {
 

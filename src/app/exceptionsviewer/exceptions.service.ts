@@ -24,6 +24,7 @@ export class ExceptionsService {
   getEnvironments(): environment[]{
     return ENVIRONMENTS;
   }
+  
   getExceptions(dateTime?: any, environment?: any, jobId?: any){
     console.log('service')
     return FAILEDRUNS;
@@ -51,7 +52,8 @@ export class ExceptionsService {
     */
   }
   getLog(docId: any){
-    return JSON.stringify(LOG1, undefined, 2)
+    //return JSON.stringify(LOG1, undefined, 2)
+    return LOG1
     /*
       const url = `${this.reqUrl}?docId={docId}`;
       return this.http.get(url)
